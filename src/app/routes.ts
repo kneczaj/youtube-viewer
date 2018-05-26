@@ -6,5 +6,8 @@ export const routes: Routes = [{
   path: 'videos',
   loadChildren: './viewer/viewer.module#ViewerModule'
 }, {
+  path: 'login',
+  loadChildren: './auth/auth.module#AuthModule'
+}, {
   path: '**', redirectTo: 'videos', pathMatch: 'full'
 }];
