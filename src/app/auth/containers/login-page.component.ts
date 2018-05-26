@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Credentials} from '../models/credentials';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'yv-login-page',
@@ -38,7 +39,8 @@ export class LoginPageComponent {
   protected credentials: Credentials = new Credentials();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {}
 
   next() {
@@ -46,6 +48,13 @@ export class LoginPageComponent {
       this.step++;
       return;
     }
+    this.authenticationService.login(this.credentials);
+    this.reset();
     this.router.navigate(['']);
+  }
+
+  reset(): void {
+    this.step = 0;
+    this.credentials = new Credentials();
   }
 }
