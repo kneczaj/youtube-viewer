@@ -5,18 +5,27 @@ import {RouterModule} from '@angular/router';
 import {VideosProviderService} from './services/videos-provider.service';
 import { SearchResultItemComponent } from './components/search-result-item.component';
 import {HttpClientModule} from '@angular/common/http';
+import { VideoPlayerComponent } from './components/video-player.component';
+import { DetailsPageComponent } from './containers/details-page.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild([{
       path: '', component: SearchResultsPageComponent
+    }, {
+      path: ':id',
+      component: DetailsPageComponent
     }]),
+    SharedModule,
     HttpClientModule
   ],
   declarations: [
     SearchResultsPageComponent,
-    SearchResultItemComponent
+    SearchResultItemComponent,
+    VideoPlayerComponent,
+    DetailsPageComponent
   ],
   providers: [VideosProviderService]
 })

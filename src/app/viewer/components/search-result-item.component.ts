@@ -4,10 +4,10 @@ import {Video} from '../models/video';
 @Component({
   selector: 'yv-search-result-item',
   template: `
-    <div class="row">
+    <a [routerLink]="item.id">
       <img src="{{item.thumbnailUrl}}"/>
       <div>{{item.title}}</div>
-    </div>
+    </a>
   `,
   styles: []
 })

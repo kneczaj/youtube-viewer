@@ -17,4 +17,11 @@ export class VideosProviderService {
       map((itemsPayload: Array<any>) => itemsPayload.map(itemPayload => new Video(itemPayload)))
     );
   }
+
+  details(id: string): Observable<Video> {
+    return this.http.get<{}>('assets/stubs/video-details.json').pipe(
+      pluck('items'),
+      map((itemsPayload: Array<any>) => new Video(itemsPayload[0]))
+    );
+  }
 }
