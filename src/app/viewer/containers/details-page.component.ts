@@ -7,7 +7,18 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'yv-details-page',
   template: `
-    <yv-video-player *ngIf="video$" [video]="video$ | async"></yv-video-player>
+    <div *ngIf="(video$ | async) as video">
+      <yv-video-player [video]="video"></yv-video-player>
+      <h2>{{video.title}}</h2>
+      <h4>Tags</h4>
+      <div>
+        <span *ngFor="let tag of video.tags">
+          {{tag}}
+        </span>
+      </div>
+      <h4>Description</h4>
+      <div>{{ video.description }}</div>
+    </div>
   `,
   styles: []
 })
