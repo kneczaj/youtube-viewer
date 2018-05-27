@@ -6,34 +6,36 @@ import {AuthenticationService} from '../services/authentication.service';
 @Component({
   selector: 'yv-login-page',
   template: `
-    <h1>Login</h1>
-    <form>
-      <div *ngIf="step === 0" class="form-group">
-        <label>User</label>
-        <input
-          type="text"
-          class="form-control"
-          name="user"
-          (keydown.enter)="next()"
-          [(ngModel)]="credentials.login"
-          yvFocus
-        />
-      </div>
-      <div *ngIf="step === 1" class="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          (keydown.enter)="next()"
-          [(ngModel)]="credentials.password"
-          yvFocus
-        />
-      </div>
-    </form>
-    <button (click)="next()">Next</button>
+    <div class="container login-container d-flex flex-column text-center">
+      <h1 class="mb-4 login-header">Login</h1>
+      <form>
+        <div *ngIf="step === 0" class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="user"
+            placeholder="User"
+            (keydown.enter)="next()"
+            [(ngModel)]="credentials.login"
+            yvFocus
+          />
+        </div>
+        <div *ngIf="step === 1" class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Password"
+            (keydown.enter)="next()"
+            [(ngModel)]="credentials.password"
+            yvFocus
+          />
+        </div>
+      </form>
+      <button class="btn btn-primary" (click)="next()">{{!step ? 'Next' : 'Login'}}</button>
+    </div>
   `,
-  styles: []
+  styleUrls: ['./login-page.component.sass']
 })
 export class LoginPageComponent {
 
