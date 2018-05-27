@@ -16,6 +16,7 @@ import {AuthenticationService} from '../services/authentication.service';
           name="user"
           (keydown.enter)="next()"
           [(ngModel)]="credentials.login"
+          yvFocus
         />
       </div>
       <div *ngIf="step === 1" class="form-group">
@@ -26,6 +27,7 @@ import {AuthenticationService} from '../services/authentication.service';
           name="password"
           (keydown.enter)="next()"
           [(ngModel)]="credentials.password"
+          yvFocus
         />
       </div>
     </form>
