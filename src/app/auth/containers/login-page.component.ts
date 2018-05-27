@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Credentials} from '../models/credentials';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
@@ -42,7 +42,8 @@ export class LoginPageComponent {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute
   ) {}
 
   next() {
@@ -52,7 +53,7 @@ export class LoginPageComponent {
     }
     this.authenticationService.login(this.credentials);
     this.reset();
-    this.router.navigate(['']);
+    this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || '']);
   }
 
   reset(): void {
