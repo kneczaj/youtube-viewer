@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   selector: 'yv-search-field',
   template: `
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search" [(ngModel)]="query">
+      <input type="text" class="form-control" placeholder="Search" [(ngModel)]="query" (keydown.enter)="search()">
       <div class="input-group-append">
         <button class="btn btn-danger" type="button" (click)="search()">
           <img width="24px" src="assets/img/search.svg">
