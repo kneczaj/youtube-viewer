@@ -6,8 +6,10 @@ import {Video} from '../models/video';
 @Component({
   selector: 'yv-search-results-page',
   template: `
-    <div *ngFor="let result of results$ | async">
-      <yv-search-result-item [item]="result"></yv-search-result-item>
+    <div class="container">
+      <div *ngFor="let result of results$ | async" class="my-3">
+        <yv-search-result-item [item]="result"></yv-search-result-item>
+      </div>
     </div>
   `,
   styles: []
