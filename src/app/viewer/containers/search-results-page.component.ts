@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {VideosProviderService} from '../services/videos-provider.service';
-import {Observable} from 'rxjs';
-import {Video} from '../models/video';
+import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {map, scan, switchMap, tap} from 'rxjs/operators';
+import {SearchResults} from '../models/search-results';
+import {Video} from '../models/video';
 
 @Component({
   selector: 'yv-search-results-page',
@@ -11,20 +13,59 @@ import {ActivatedRoute} from '@angular/router';
       <div *ngFor="let result of results$ | async" class="my-3">
         <yv-search-result-item [item]="result"></yv-search-result-item>
       </div>
+      <div *ngIf="loading" class="mt-1"><p>Loading...</p></div>
     </div>
   `,
-  styles: []
+  styles: [`
+    :host {
+      overflow-y: auto;
+    }
+  `]
 })
 export class SearchResultsPageComponent implements OnInit {
 
-  results$: Observable<Video[]>;
+  private loadRequest: Subject<void> = new ReplaySubject<void>(1);
+
+  protected results$: Observable<Video[]>;
+  protected loading = false;
+  private nextPageToken = null;
+
+  get query() {
+    return this.route.snapshot.params['query'];
+  }
 
   constructor(
     private videosProvider: VideosProviderService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private element: ElementRef
+  ) {
+    this.results$ = this.loadRequest.pipe(
+      tap(() => this.loading = true),
+      switchMap(() => this.loadMore()),
+      scan((allResults: SearchResults, newResults: SearchResults) => {
+        allResults.update(newResults);
+        return allResults;
+      }, new SearchResults({})),
+      tap(results => this.nextPageToken = results.nextPageToken),
+      map(results => results.videos),
+      tap(() => this.loading = false)
+    );
+  }
 
   ngOnInit() {
-    this.results$ = this.videosProvider.search(this.route.snapshot.params['query']);
+    this.loadRequest.next();
+  }
+
+  @HostListener('scroll')
+  onScroll() {
+    const element = this.element.nativeElement;
+    const scrollToBottomDistance = element.scrollHeight - (element.scrollTop + element.offsetHeight);
+    if (scrollToBottomDistance === 0 && !this.loading) {
+      this.loadRequest.next();
+    }
+  }
+
+  private loadMore(): Observable<SearchResults> {
+    return this.videosProvider.search(this.query, this.nextPageToken);
   }
 }
