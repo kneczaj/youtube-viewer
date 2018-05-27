@@ -8,14 +8,21 @@ import {HttpClientModule} from '@angular/common/http';
 import { VideoPlayerComponent } from './components/video-player.component';
 import { DetailsPageComponent } from './containers/details-page.component';
 import {SharedModule} from '../shared/shared.module';
+import { SearchFieldComponent } from './containers/search-field.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([{
-      path: '', component: SearchResultsPageComponent
+      path: '',
+      outlet: 'navbar',
+      component: SearchFieldComponent
     }, {
-      path: ':id',
+      path: 'search/:query', component: SearchResultsPageComponent
+    }, {
+      path: 'details/:id',
       component: DetailsPageComponent
     }]),
     SharedModule,
@@ -25,7 +32,8 @@ import {SharedModule} from '../shared/shared.module';
     SearchResultsPageComponent,
     SearchResultItemComponent,
     VideoPlayerComponent,
-    DetailsPageComponent
+    DetailsPageComponent,
+    SearchFieldComponent
   ],
   providers: [VideosProviderService]
 })

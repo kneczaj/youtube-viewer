@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
             <a href="" class="navbar-brand align-items-center">
               <strong>Youtube Viewer</strong>
             </a>
+            <router-outlet name="navbar"></router-outlet>
           </div>
         </div>
       </header>
