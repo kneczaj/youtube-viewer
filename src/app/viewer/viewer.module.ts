@@ -10,6 +10,7 @@ import { DetailsPageComponent } from './containers/details-page.component';
 import {SharedModule} from '../shared/shared.module';
 import { SearchFieldComponent } from './containers/search-field.component';
 import {FormsModule} from '@angular/forms';
+import { EmptyResultsPageComponent } from './containers/empty-results-page.component';
 
 @NgModule({
   imports: [
@@ -20,10 +21,14 @@ import {FormsModule} from '@angular/forms';
       outlet: 'navbar',
       component: SearchFieldComponent
     }, {
+      path: 'search', component: EmptyResultsPageComponent
+    }, {
       path: 'search/:query', component: SearchResultsPageComponent
     }, {
       path: 'details/:id',
       component: DetailsPageComponent
+    }, {
+      path: '**', redirectTo: 'search', pathMatch: 'full'
     }]),
     SharedModule,
     HttpClientModule
@@ -33,7 +38,8 @@ import {FormsModule} from '@angular/forms';
     SearchResultItemComponent,
     VideoPlayerComponent,
     DetailsPageComponent,
-    SearchFieldComponent
+    SearchFieldComponent,
+    EmptyResultsPageComponent
   ],
   providers: [VideosProviderService]
 })
