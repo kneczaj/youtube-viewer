@@ -23,6 +23,8 @@ import { EmptyResultsPageComponent } from './containers/empty-results-page.compo
     }, {
       path: 'search', component: EmptyResultsPageComponent
     }, {
+      path: 'search/', component: EmptyResultsPageComponent
+    }, {
       path: 'search/:query', component: SearchResultsPageComponent
     }, {
       path: 'details/:id',
