@@ -4,6 +4,10 @@ import { LoginPageComponent } from './containers/login-page.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
+import {PasswordFormPageComponent} from './containers/password-form-page.component';
+import {UserFormPageComponent} from './containers/user-form-page.component';
+import {PasswordGuard} from './guards/password.guard';
+import {CredentialsFormService} from './services/credentials-form.service';
 
 @NgModule({
   imports: [
@@ -11,12 +15,27 @@ import {SharedModule} from '../shared/shared.module';
     ReactiveFormsModule,
     RouterModule.forChild([{
       path: '',
-      component: LoginPageComponent
+      redirectTo: 'user',
+      pathMatch: 'full'
+    }, {
+      path: '',
+      component: LoginPageComponent,
+      children: [{
+        path: 'password',
+        component: PasswordFormPageComponent,
+        canActivate: [PasswordGuard]
+      }, {
+        path: 'user',
+        component: UserFormPageComponent
+      }]
     }]),
     SharedModule
   ],
   declarations: [
-    LoginPageComponent
-  ]
+    LoginPageComponent,
+    PasswordFormPageComponent,
+    UserFormPageComponent
+  ],
+  providers: [CredentialsFormService, PasswordGuard]
 })
 export class AuthModule { }
