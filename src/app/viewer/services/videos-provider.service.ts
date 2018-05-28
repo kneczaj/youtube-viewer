@@ -11,17 +11,20 @@ import {isNull} from 'util';
 })
 export class VideosProviderService {
 
-  constructor(private http: HttpClient) { }
+  private baseUrl = 'https://www.googleapis.com/youtube/v3';
+
+  constructor(private apiKey: string, private http: HttpClient) { }
 
   search(query: string, pageToken: string | null = null): Observable<SearchResults> {
-    const pageTokenStr = isNull(pageToken) ? '' : `-${pageToken}`;
-    return this.http.get<{}>(`assets/stubs/search-query-results${pageTokenStr}.json`).pipe(
+    const pageTokenStr = isNull(pageToken) ? '' : `&pageToken=${pageToken}`;
+    const url = `${this.baseUrl}/search?part=snippet&maxResults=50&q=${query}&type=video&key=${this.apiKey}${pageTokenStr}`;
+    return this.http.get<{}>(url).pipe(
       map(payload => new SearchResults(payload))
     );
   }
 
   details(id: string): Observable<Video> {
-    return this.http.get<{}>('assets/stubs/video-details.json').pipe(
+    return this.http.get<{}>(`${this.baseUrl}/videos?part=snippet&id=${id}&key=${this.apiKey}`).pipe(
       pluck('items'),
       map((itemsPayload: Array<any>) => new Video(itemsPayload[0]))
     );

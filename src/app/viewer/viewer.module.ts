@@ -4,13 +4,17 @@ import { SearchResultsPageComponent } from './containers/search-results-page.com
 import {RouterModule} from '@angular/router';
 import {VideosProviderService} from './services/videos-provider.service';
 import { SearchResultItemComponent } from './components/search-result-item.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { VideoPlayerComponent } from './components/video-player.component';
 import { DetailsPageComponent } from './containers/details-page.component';
 import {SharedModule} from '../shared/shared.module';
 import { SearchFieldComponent } from './containers/search-field.component';
 import {FormsModule} from '@angular/forms';
 import { EmptyResultsPageComponent } from './containers/empty-results-page.component';
+
+export function videoProviderFactory(http: HttpClient) {
+  return new VideosProviderService('AIzaSyBNIenM9jEVoDDg2_ik6JKdS_KR0RQw-5Y', http);
+}
 
 @NgModule({
   imports: [
@@ -43,6 +47,10 @@ import { EmptyResultsPageComponent } from './containers/empty-results-page.compo
     SearchFieldComponent,
     EmptyResultsPageComponent
   ],
-  providers: [VideosProviderService]
+  providers: [{
+    provide: VideosProviderService,
+    useFactory: videoProviderFactory,
+    deps: [HttpClient]
+  }]
 })
 export class ViewerModule {}
