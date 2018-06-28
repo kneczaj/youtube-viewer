@@ -2,7 +2,9 @@ import { Routes } from '@angular/router';
 import {AuthGuard} from './auth/guards/auth.guard';
 
 export const routes: Routes = [{
-  path: '', redirectTo: 'videos', pathMatch: 'full'
+  path: '',
+  redirectTo: 'viewer',
+  pathMatch: 'full'
 }, {
   path: 'viewer',
   loadChildren: './viewer/viewer.module#ViewerModule',
