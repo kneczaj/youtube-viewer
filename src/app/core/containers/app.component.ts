@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <header class="flex-shrink-0">
         <div class="navbar navbar-dark bg-dark shadow-sm">
           <div class="container justify-content-between">
-            <a href="" class="navbar-brand align-items-center">
+            <a [routerLink]="['/']" class="navbar-brand align-items-center">
               <strong>Youtube Viewer</strong>
             </a>
             <router-outlet name="navbar"></router-outlet>
