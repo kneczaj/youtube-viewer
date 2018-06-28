@@ -11,6 +11,7 @@ import {SharedModule} from '../shared/shared.module';
 import { SearchFieldComponent } from './containers/search-field.component';
 import {FormsModule} from '@angular/forms';
 import { EmptyResultsPageComponent } from './containers/empty-results-page.component';
+import {VideoResolve} from './resolvers/video.resolve';
 
 export function videoProviderFactory(http: HttpClient) {
   return new VideosProviderService('AIzaSyBNIenM9jEVoDDg2_ik6JKdS_KR0RQw-5Y', http);
@@ -44,7 +45,10 @@ export function videoProviderFactory(http: HttpClient) {
         outlet: 'navbar'
       }, {
         path: '',
-        component: DetailsPageComponent
+        component: DetailsPageComponent,
+        resolve: {
+          video: VideoResolve
+        }
       }]
     }, {
       path: '**', redirectTo: 'search', pathMatch: 'full'
@@ -60,10 +64,13 @@ export function videoProviderFactory(http: HttpClient) {
     SearchFieldComponent,
     EmptyResultsPageComponent
   ],
-  providers: [{
-    provide: VideosProviderService,
-    useFactory: videoProviderFactory,
-    deps: [HttpClient]
-  }]
+  providers: [
+    VideoResolve,
+    {
+      provide: VideosProviderService,
+      useFactory: videoProviderFactory,
+      deps: [HttpClient]
+    }
+  ]
 })
 export class ViewerModule {}

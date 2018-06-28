@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import {AuthGuard} from './auth/guards/auth.guard';
+import {NotFoundPageComponent} from './core/containers/not-found-page.component';
 
 export const routes: Routes = [{
   path: '',
@@ -13,5 +14,10 @@ export const routes: Routes = [{
   path: 'login',
   loadChildren: './auth/auth.module#AuthModule'
 }, {
-  path: '**', redirectTo: 'viewer', pathMatch: 'full'
+  path: 'not-found',
+  component: NotFoundPageComponent
+}, {
+  path: '**',
+  redirectTo: 'not-found',
+  pathMatch: 'full'
 }];

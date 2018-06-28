@@ -26,7 +26,7 @@ export class VideosProviderService {
   details(id: string): Observable<Video> {
     return this.http.get<{}>(`${this.baseUrl}/videos?part=snippet&id=${id}&key=${this.apiKey}`).pipe(
       pluck('items'),
-      map((itemsPayload: Array<any>) => new Video(itemsPayload[0]))
+      map((itemsPayload: Array<any>) => itemsPayload[0] ? new Video(itemsPayload[0]) : null)
     );
   }
 }
