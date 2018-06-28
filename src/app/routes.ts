@@ -11,9 +11,6 @@ export const routes: Routes = [{
   loadChildren: './viewer/viewer.module#ViewerModule',
   canActivate: [AuthGuard]
 }, {
-  path: 'login',
-  loadChildren: './auth/auth.module#AuthModule'
-}, {
   path: 'not-found',
   component: NotFoundPageComponent
 }, {

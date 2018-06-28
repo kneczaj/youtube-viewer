@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './containers/login-page.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -8,17 +8,14 @@ import {PasswordFormPageComponent} from './containers/password-form-page.compone
 import {UserFormPageComponent} from './containers/user-form-page.component';
 import {PasswordGuard} from './guards/password.guard';
 import {CredentialsFormService} from './services/credentials-form.service';
+import {AuthenticationService} from './services/authentication.service';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([{
-      path: '',
-      redirectTo: 'user',
-      pathMatch: 'full'
-    }, {
-      path: '',
+      path: 'login',
       component: LoginPageComponent,
       children: [{
         path: 'password',
@@ -27,6 +24,10 @@ import {CredentialsFormService} from './services/credentials-form.service';
       }, {
         path: 'user',
         component: UserFormPageComponent
+      }, {
+        path: '',
+        redirectTo: 'user',
+        pathMatch: 'full'
       }]
     }]),
     SharedModule
@@ -35,7 +36,17 @@ import {CredentialsFormService} from './services/credentials-form.service';
     LoginPageComponent,
     PasswordFormPageComponent,
     UserFormPageComponent
-  ],
-  providers: [CredentialsFormService, PasswordGuard]
+  ]
 })
-export class AuthModule { }
+export class AuthModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AuthModule,
+      providers: [
+        AuthenticationService,
+        CredentialsFormService,
+        PasswordGuard
+      ],
+    };
+  }
+}
