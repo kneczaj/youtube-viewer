@@ -5,12 +5,21 @@ import { Component } from '@angular/core';
   template: `
     <div class="main-container d-flex flex-column">
       <header class="flex-shrink-0">
-        <div class="navbar navbar-dark bg-dark shadow-sm">
-          <div class="container justify-content-between">
-            <a [routerLink]="['/']" class="navbar-brand align-items-center">
-              <strong>Youtube Viewer</strong>
-            </a>
-            <router-outlet name="navbar"></router-outlet>
+        <div class="navbar navbar-dark bg-dark shadow-sm navbar-expand">
+          <div class="container">
+            <div class="navbar-nav mr-auto">
+              <a [routerLink]="['/']" class="navbar-brand">
+                <strong>Youtube Viewer</strong>
+              </a>
+            </div>
+            <div class="navbar-nav">
+              <div class="nav-item mr-3">
+                <router-outlet name="navbar"></router-outlet>
+              </div>
+              <div class="nav-item">
+                <router-outlet name="navbar2"></router-outlet>
+              </div>
+            </div>
           </div>
         </div>
       </header>

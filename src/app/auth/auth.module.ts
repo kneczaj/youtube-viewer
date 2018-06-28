@@ -9,12 +9,17 @@ import {UserFormPageComponent} from './containers/user-form-page.component';
 import {PasswordGuard} from './guards/password.guard';
 import {CredentialsFormService} from './services/credentials-form.service';
 import {AuthenticationService} from './services/authentication.service';
+import { ProfileMenuPageComponent } from './containers/profile-menu-page.component';
+import { LogoutPageComponent } from './containers/logout-page.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([{
+      path: 'logout',
+      component: LogoutPageComponent
+    }, {
       path: 'login',
       component: LoginPageComponent,
       children: [{
@@ -35,7 +40,9 @@ import {AuthenticationService} from './services/authentication.service';
   declarations: [
     LoginPageComponent,
     PasswordFormPageComponent,
-    UserFormPageComponent
+    UserFormPageComponent,
+    ProfileMenuPageComponent,
+    LogoutPageComponent
   ]
 })
 export class AuthModule {

@@ -4,6 +4,7 @@ import {HashedCredentials} from '../models/hashed-credentials';
 import {isNull, isUndefined} from 'util';
 import {database} from './database';
 import {Credentials} from '../models/credentials';
+import {Router} from '@angular/router';
 
 /**
  * As this is not a real authentication service, and no tokens are generated to be checked at backend side,
@@ -19,7 +20,9 @@ export class AuthenticationService {
     return this._user;
   }
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.database = database.users;
     this._user = localStorage.getItem('user') || null;
   }
@@ -36,6 +39,7 @@ export class AuthenticationService {
   logout(): void {
     this._user = null;
     localStorage.removeItem('user');
+    this.router.navigate(['logout'], { queryParams: { returnUrl: this.router.url }});
   }
 
   isAuthenticated(): boolean {
