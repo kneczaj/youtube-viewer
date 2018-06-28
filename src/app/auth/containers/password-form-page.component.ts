@@ -19,7 +19,7 @@ import {CredentialsFormService} from '../services/credentials-form.service';
     <div *ngIf="showValidationError" class="alert alert-danger">
       The field is required.
     </div>
-    <button class="btn btn-primary" [disabled]="showValidationError" (click)="next()">Login</button>
+    <button class="btn btn-primary w-100" [disabled]="showValidationError" (click)="next()">Login</button>
   `,
   styles: []
 })

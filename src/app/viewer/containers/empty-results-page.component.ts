@@ -3,12 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'yv-empty-results-page',
   template: `
-    <div class="container">
-      <p class="mt-3">
-        No query -> no results :) Please use the search field on top.
-      </p>
-    </div>
+    <yv-centered>
+      <h1 class="mb-4">What you're looking for?</h1>
+      <yv-search-field></yv-search-field>
+    </yv-centered>
   `,
-  styles: []
+  styles: [`:host { flex-basis: 100%; }`]
 })
 export class EmptyResultsPageComponent {}

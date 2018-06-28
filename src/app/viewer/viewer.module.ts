@@ -21,18 +21,31 @@ export function videoProviderFactory(http: HttpClient) {
     CommonModule,
     FormsModule,
     RouterModule.forChild([{
-      path: '',
-      outlet: 'navbar',
-      component: SearchFieldComponent
-    }, {
-      path: 'search', component: EmptyResultsPageComponent
-    }, {
-      path: 'search/', component: EmptyResultsPageComponent
-    }, {
-      path: 'search/:query', component: SearchResultsPageComponent
+      path: 'search',
+      children: [{
+        path: '',
+        component: EmptyResultsPageComponent
+      }, {
+        path: ':query',
+        children: [{
+          path: '',
+          component: SearchResultsPageComponent,
+        }, {
+          path: '',
+          outlet: 'navbar',
+          component: SearchFieldComponent
+        }]
+      }]
     }, {
       path: 'details/:id',
-      component: DetailsPageComponent
+      children: [{
+        path: '',
+        component: SearchFieldComponent,
+        outlet: 'navbar'
+      }, {
+        path: '',
+        component: DetailsPageComponent
+      }]
     }, {
       path: '**', redirectTo: 'search', pathMatch: 'full'
     }]),

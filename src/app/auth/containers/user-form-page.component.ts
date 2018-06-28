@@ -23,7 +23,7 @@ import {Router} from '@angular/router';
     <div *ngIf="showValidationError" class="alert alert-danger">
       The field is required.
     </div>
-    <button class="btn btn-primary" [disabled]="showValidationError" (click)="next()">Next</button>
+    <button class="btn btn-primary w-100" [disabled]="showValidationError" (click)="next()">Next</button>
   `,
   styles: []
 })

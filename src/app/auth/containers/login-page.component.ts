@@ -3,11 +3,11 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'yv-login-page',
   template: `
-    <div class="container login-container d-flex flex-column text-center">
-      <h1 class="mb-4 login-header">Login</h1>
+    <yv-centered>
+      <h1 class="mb-4">Login</h1>
       <router-outlet></router-outlet>
-    </div>
+    </yv-centered>
   `,
-  styleUrls: ['./login-page.component.sass']
+  styles: [`:host { flex-basis: 100%; }`]
 })
 export class LoginPageComponent {}
