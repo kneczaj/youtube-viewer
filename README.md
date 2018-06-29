@@ -1,27 +1,23 @@
 # YoutubeViewer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
+This project was build as a recruitment task for one of companies. It is a kind of demo app.
 
-## Development server
+The app uses Youtube V3 API.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+It has two feature modules:
+1. Auth - for authorization
+2. Viewer - for watching youtube
 
-## Code scaffolding
+The Auth module is a fake authorization. It has one user hardcoded, the credentials of which you can see at login windows. The information about the logged in
+user is stored in HTML5's localStorage, so it will not ask you to log in again after a refresh.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Running
 
-## Build
+## Requirements
+The app needs NodeJS version 8.9 or higher, as this is requirement of Angular 6.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Installing dependencies
+Run `npm install` in the dir where the repo is cloned to install all JS dependencies.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Running
+To start development server run `npm start` in the main repo dir. 
