@@ -16,6 +16,7 @@ import {CredentialsFormService} from '../services/credentials-form.service';
         />
       </div>
     </form>
+    <p>Hint: type "password"</p>
     <div *ngIf="showValidationError" class="alert alert-danger">
       The field is required.
     </div>

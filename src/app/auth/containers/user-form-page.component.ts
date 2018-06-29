@@ -20,6 +20,7 @@ import {Router} from '@angular/router';
         />
       </div>
     </form>
+    <p>Hint: type "user"</p>
     <div *ngIf="showValidationError" class="alert alert-danger">
       The field is required.
     </div>
